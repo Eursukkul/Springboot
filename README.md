@@ -7,7 +7,8 @@ Java SpringBoot Backend
 - Panding Topic(Upload File)
 - Database (PostgreSQl) run in Dockker < DB 1 Table >
 - Database (Foreign key : OnetoOne, OnetoMany ) < Add Datable 1-2 Tabable connection Old DB>
-![DB+Docker](https://user-images.githubusercontent.com/106970646/184547072-e5848ae6-2460-4b93-b397-4d83e1ac1cf1.png)
+![DB+Docker](https://user-images.githubusercontent.com/106970646/184547210-ed45ba34-7331-4921-96c8-81fe60073a58.png)
+
 
 - Security ( ให้ REST Conteoller)
 - Unit Test
