@@ -1,9 +1,10 @@
 package com.training.backend.entity;
 
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.*;
+
 import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)

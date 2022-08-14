@@ -53,7 +53,7 @@ public class UserBusiness {
 
     public String refreshToken() throws BaseException {
         Optional<String> opt = SecurityUtil.getCurrentUserId();
-        if (opt.isEmpty()) {    // check ว่า มี token ไหม ถ้าไม่มี show error
+        if (opt.isEmpty()) {
             throw UserException.unauthorized();
         }
 
