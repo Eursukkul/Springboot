@@ -12,17 +12,17 @@ import java.util.Calendar;
 import java.util.Date;
 
 @Service
-public class TokenService {
+public class TokenService {        // หน้าที่สร้าง token
 
-    @Value("${app.token.secret}")
+    @Value("${app.token.secret}")  // หน้าที่ BackEnd set ควรจะเปลี่ยนบ่อยๆ
     private String secret;
 
-    @Value("${app.token.issuer}")
+    @Value("${app.token.issuer}") // ใครคือคนสร้าง token
     private String issuer;
 
-    public String tokenize(User user) {
+    public String tokenize(User user) {         // Token Expire
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.MINUTE, 60);
+        calendar.add(Calendar.MINUTE, 60);  // Expire 60 min
         Date expiresAt = calendar.getTime();
 
         return JWT.create()
@@ -32,17 +32,17 @@ public class TokenService {
                 .withExpiresAt(expiresAt)
                 .sign(algorithm());
     }
-
+    // check ว่าถูกต้องไหม หมดอายุหรือยัง
     public DecodedJWT verify(String token) {
         try {
             JWTVerifier verifier = JWT.require(algorithm())
                     .withIssuer(issuer)
                     .build();
 
-            return verifier.verify(token);
+            return verifier.verify(token); //ถ้าผ่าน
 
         } catch (Exception e) {
-            return null;
+            return null;   // ถ้าไม่ผ่าน
         }
     }
 

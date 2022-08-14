@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TokenFilter extends GenericFilterBean {
+public class TokenFilter extends GenericFilterBean {   // สร้าง filter ทุก request ของ Spring
 
     private final TokenService tokenService;
 
@@ -29,35 +29,38 @@ public class TokenFilter extends GenericFilterBean {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        HttpServletRequest request = (HttpServletRequest) servletRequest;
-        String authorization = request.getHeader("Authorization");
+        HttpServletRequest request = (HttpServletRequest) servletRequest;   // Servlet request convert to HTTPServlet
+        String authorization = request.getHeader("Authorization");  // check Header name Authorization
         if (ObjectUtils.isEmpty(authorization)) {
+            filterChain.doFilter(servletRequest, servletResponse);     // ไม่มีออกไปเลย
+            return;
+        }
+
+        if (!authorization.startsWith("Bearer ")) {                     // check Authorization ประเภท Bearer ถ้ามีทำงานต่อ ถ้าไม่มีออกเป็นเลย
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         }
 
-        if (!authorization.startsWith("Bearer ")) {
-            filterChain.doFilter(servletRequest, servletResponse);
-            return;
-        }
-
-        String token = authorization.substring(7);
+        // ใช้ Substring
+        String token = authorization.substring(7); // ดึง token มา verify ถ้า verify ผ่าน จะได้ JWT ที่ decoded แล้วเพื่อใช้งานต่อ
         DecodedJWT decoded = tokenService.verify(token);
 
-        if (decoded == null) {
+        if (decoded == null) {  // ถ้า decode เป็นออกจากฟังชั่น
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         }
 
         // user id
+        // if ture
         String principal = decoded.getClaim("principal").asString();
         String role = decoded.getClaim("role").asString();
 
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(role));
-
+        // ดึงค่าออกเป็น AuthenticationToken // UserID , password(credentials) , สิทธิของ user
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(principal, "(protected)", authorities);
 
+        // set authentication security ว่า authentication login เข้ามา
         SecurityContext context = SecurityContextHolder.getContext();
         context.setAuthentication(authentication);
 
