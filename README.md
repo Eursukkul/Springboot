@@ -25,12 +25,10 @@ This section should list any major frameworks/libraries used to my project.
 
 ![DB+Docker](https://user-images.githubusercontent.com/106970646/184547210-ed45ba34-7331-4921-96c8-81fe60073a58.png)
 
-
 - Security 
 - Unit Test
 
 ![Test](https://user-images.githubusercontent.com/106970646/184548522-a9922608-7588-4bda-b877-a1499c5a0419.png)
-
 
 - JWT 
 
