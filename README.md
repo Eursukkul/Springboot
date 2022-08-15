@@ -1,10 +1,6 @@
 ##Java SpringBoot Backend
 
-### Built With
-
-* [![Java]
-* [![SpringBoot]
-* [![HTML]
+```
 
 - Health Check
 - REST Controller
