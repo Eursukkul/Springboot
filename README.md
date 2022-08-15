@@ -31,6 +31,14 @@ This section should list any major frameworks/libraries used to my project.
 ![Test](https://user-images.githubusercontent.com/106970646/184548522-a9922608-7588-4bda-b877-a1499c5a0419.png)
 
 - JWT 
+confic
+```
+<dependency>
+    <groupId>com.auth0</groupId>
+    <artifactId>java-jwt</artifactId>
+    <version>4.0.0</version>
+</dependency>
+````
 
 ![JWT](https://user-images.githubusercontent.com/106970646/184547126-a235ab92-b2b8-4546-8969-160d345b30f3.jpg)
 
