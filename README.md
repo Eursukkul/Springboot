@@ -20,6 +20,73 @@ This section should list any major frameworks/libraries used to my project.
 - ERROR  Adviser
 - Exception Handler
 - Panding Topic(Upload File)
+      ```
+      @PostMapping("/upload-profile")
+          public ResponseEntity<String> uploadProfilePicture(@RequestPart MultipartFile file) throws BaseException {
+              String response = business.uploadProfilePicture(file);
+              return ResponseEntity.ok(response);
+          }
+      ```
+      ```
+   
+      public class FileException extends BaseException {
+
+          public FileException(String code) {
+              super("file." + code);
+          }
+
+          public static FileException fileNull() {
+              return new FileException("null");
+          }
+
+          public static FileException fileMaxSize() {
+              return new FileException("max.size");
+          }
+
+          public static FileException unsupported() {
+              return new FileException("unsupported.file.type");
+          }
+
+      }
+    
+      ```
+      ```
+            public String uploadProfilePicture(MultipartFile file) throws BaseException {
+              // validate file
+              if (file == null) {
+                  // throw error
+                  throw FileException.fileNull();
+              }
+
+              // validate size
+              if (file.getSize() > 1048576 * 2) {
+                  // throw error
+                  throw FileException.fileMaxSize();
+              }
+
+              String contentType = file.getContentType();
+              if (contentType == null) {
+                  // throw error
+                  throw FileException.unsupported();
+              }
+
+              List<String> supportedTypes = Arrays.asList("image/jpeg", "image/png");
+              if (!supportedTypes.contains(contentType)) {
+                  // throw error (unsupport)
+                  throw FileException.unsupported();
+              }
+
+              // TODO: upload file File Storage (AWS S3, etc...)
+              try {
+                  byte[] bytes = file.getBytes();
+              } catch (IOException e) {
+                  e.printStackTrace();
+              }
+
+              return "";
+          }
+      ```    
+
 - Database (PostgreSQl) run in Dockker < DB 1 Table >
 - Database (Foreign key : OnetoOne, OnetoMany ) < Add Datable 1-2 Tabable connection Old DB>
 
