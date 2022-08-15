@@ -26,8 +26,7 @@ This section should list any major frameworks/libraries used to my project.
               String response = business.uploadProfilePicture(file);
               return ResponseEntity.ok(response);
           }
-      ```
-      ```
+     
    
       public class FileException extends BaseException {
 
@@ -49,8 +48,6 @@ This section should list any major frameworks/libraries used to my project.
 
       }
     
-      ```
-      ```
             public String uploadProfilePicture(MultipartFile file) throws BaseException {
               // validate file
               if (file == null) {
