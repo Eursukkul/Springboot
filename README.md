@@ -5,10 +5,13 @@
 
 This section should list any major frameworks/libraries used to my project.
 
-* [![Java][java.com]][java-url]
-* [![SpringBoot][spring.io]][spring-url]
+#### Java
+#### SpringBoot
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- GETTING STARTED -->
+## Getting Started
 
 
 - Health Check
